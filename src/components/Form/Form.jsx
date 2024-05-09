@@ -13,18 +13,18 @@ const Form = () => {
     const data = {
       country,
       street,
-      subject
-    }
-    tg.sendData(JSON.parse(data))
-  })
+      subject,
+    };
+    tg.sendData(JSON.parse(data));
+  }, [country, street, subject]);
 
   useEffect(() => {
-    tg.onEvent('mainButtonClicked', onSendData)
+    tg.onEvent("mainButtonClicked", onSendData);
 
     return () => {
-      tg.offEvent('mainButtonClicked', onSendData)
-    }
-  }, [])
+      tg.offEvent("mainButtonClicked", onSendData);
+    };
+  }, [onSendData]);
 
   useEffect(() => {
     tg.MainButton.setParams({
@@ -39,8 +39,6 @@ const Form = () => {
       tg.MainButton.show();
     }
   }, [country, street]);
-
-
 
   const onChangeCountry = (e) => {
     setCountry(e.target.value);
