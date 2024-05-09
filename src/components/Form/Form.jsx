@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./Form.css";
-import { useTelegram } from "../../hooks/useTelegram";
 
 const Form = () => {
   const tg = window.Telegram.WebApp;
@@ -19,7 +18,7 @@ const Form = () => {
   }, [country, street, subject]);
 
   useEffect(() => {
-    tg.onEvent("mainButtonClicked", onSendData);
+    tg.onEvent("mainButtonClicked", onSendData); // onEvent - слушатель событий
 
     return () => {
       tg.offEvent("mainButtonClicked", onSendData);
