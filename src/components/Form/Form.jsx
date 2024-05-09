@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./Form.css";
+const tg = window.Telegram.WebApp;
 
 const Form = () => {
-  const tg = window.Telegram.WebApp;
-
   const [country, setCountry] = useState("");
   const [street, setStreet] = useState("");
   const [subject, setSubject] = useState("physical");
@@ -14,7 +13,8 @@ const Form = () => {
       street,
       subject,
     };
-    tg.sendData(JSON.parse(data));
+    //отправляем все данные в бот sendData
+    tg.sendData(JSON.stringify(data));
   }, [country, street, subject]);
 
   useEffect(() => {
