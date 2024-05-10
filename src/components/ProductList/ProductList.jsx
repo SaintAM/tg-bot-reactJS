@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./ProductList.css";
 import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from "../../hooks/useTelegram";
@@ -22,7 +22,7 @@ const products = [
     id: "4",
     title: "Парка",
     price: 12000,
-    description: "Оранжевого цвета, с  мехом",
+    description: "Оранжевого цвета",
   },
 ];
 const getTotalPrice = (items = []) => {
@@ -47,7 +47,7 @@ const ProductList = () => {
       },
       body: JSON.stringify(data),
     });
-  }, []);
+  }, [addedItems]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData); // onEvent - слушатель событий
