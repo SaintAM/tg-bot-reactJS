@@ -4,7 +4,7 @@ import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from "../../hooks/useTelegram";
 const tg = window.Telegram.WebApp;
 
-const products = [
+let products = [
   {
     id: "1",
     title: "Джинсы",
