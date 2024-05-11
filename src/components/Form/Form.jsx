@@ -7,13 +7,23 @@ const Form = () => {
   const [street, setStreet] = useState("");
   const [subject, setSubject] = useState("physical");
 
+  const onChangeCountry = (e) => {
+    setCountry(e.target.value);
+  };
+  const onChangeStreet = (e) => {
+    setStreet(e.target.value);
+  };
+  const onChangeSubject = (e) => {
+    setSubject(e.target.value);
+  };
+  
   const onSendData = useCallback(() => {
     const data = {
       country,
       street,
       subject,
     };
-    //отправляем все данные в бот sendData
+    //отправляем все данные в бот, метод sendData
     tg.sendData(JSON.stringify(data));
   }, [country, street, subject]);
 
@@ -24,13 +34,13 @@ const Form = () => {
       tg.offEvent("mainButtonClicked", onSendData);
     };
   }, [onSendData]);
-
+  // с помощью useEffect меняем текст на главной кнопке
   useEffect(() => {
     tg.MainButton.setParams({
       text: "Отправить данные",
     });
   }, []);
-
+  // с помощью useEffect скрываем или отображаем главную кнопку
   useEffect(() => {
     if (!street || !country) {
       tg.MainButton.hide();
@@ -38,16 +48,6 @@ const Form = () => {
       tg.MainButton.show();
     }
   }, [country, street]);
-
-  const onChangeCountry = (e) => {
-    setCountry(e.target.value);
-  };
-  const onChangeStreet = (e) => {
-    setStreet(e.target.value);
-  };
-  const onChangeSubject = (e) => {
-    setSubject(e.target.value);
-  };
 
   return (
     <div className={"form"}>

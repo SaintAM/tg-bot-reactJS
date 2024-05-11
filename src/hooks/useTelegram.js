@@ -5,7 +5,7 @@ export function useTelegram() {
   const onClose = () => {
     tg.close();
   };
-
+  // Для отображения/скрытия главной кнопки (которая снизу)
   const onToggleButton = () => {
     if (tg.MainButton.isVisible) {
       tg.MainButton.hide();
@@ -16,6 +16,7 @@ export function useTelegram() {
 
   return {
     tg,
+    // initDataUnsafe.user - данные о пользователе
     user: tg.initDataUnsafe?.user,
     queryId: tg.initDataUnsafe?.query_id,
     onClose,
