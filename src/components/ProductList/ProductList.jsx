@@ -31,7 +31,8 @@ const getTotalPrice = (items = []) => {
 
 const ProductList = () => {
   const [addedItems, setAddedItems] = useState([]);
-  const { queryId } = useTelegram();
+  // const { queryId } = useTelegram();
+	const queryId =  tg.initDataUnsafe?.query_id
 
   const onSendData = useCallback(() => {
     const data = {
