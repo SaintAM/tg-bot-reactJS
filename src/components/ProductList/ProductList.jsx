@@ -52,7 +52,6 @@ const ProductList = () => {
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData); // onEvent - слушатель событий
-
     return () => {
       tg.offEvent("mainButtonClicked", onSendData);
     };
