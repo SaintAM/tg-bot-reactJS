@@ -19,7 +19,7 @@ function App() {
     <div className="app">
       <Header />
       <ProductList/>
-      {/* <Button onClick={onToggleButton}>toggle</Button> */}
+      <Button onClick={onToggleButton}>toggle</Button>
     </div>
   );
 }
