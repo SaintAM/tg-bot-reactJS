@@ -1,38 +1,25 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./ProductList.css";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from "../../hooks/useTelegram";
+import { productService } from "../../services/products.service";
 const tg = window.Telegram.WebApp;
 
-let products = [
-  {
-    id: "1",
-    title: "Джинсы",
-    price: 5000,
-    description: "Синего цвета, прямые",
-  },
-  { id: "2", title: "Джинсы", price: 7000, description: "Желтого цвета, овер" },
-  {
-    id: "3",
-    title: "Куртка",
-    price: 8000,
-    description: "Черного цвета, зимняя",
-  },
-  {
-    id: "4",
-    title: "Парка",
-    price: 12000,
-    description: "Оранжевого цвета",
-  },
-];
 const getTotalPrice = (items = []) => {
-  return items.reduce((acc, item) => acc += item.price, 0);
+  return items.reduce((acc, item) => (acc += item.price), 0);
 };
 
 const ProductList = () => {
+  const { data } = useQuery({
+    queryKey: ["product key"],
+    queryFn: () => productService.getProducts(),
+  });
+  console.log(data);
+
   const [addedItems, setAddedItems] = useState([]);
   // const { queryId } = useTelegram();
-	const queryId =  tg.initDataUnsafe?.query_id
+  const queryId = tg.initDataUnsafe?.query_id;
 
   const onSendData = useCallback(() => {
     const data = {
@@ -77,13 +64,14 @@ const ProductList = () => {
       });
     }
   };
+  if (!data) return <>Загрузка...</>;
 
   return (
-    <div className={"list"}>
-      {products.map((item) => (
-        <ProductItem  product={item} onAdd={onAdd} className={"item"} />
+    <ul className={"list"}>
+      {data.map((item) => (
+        <ProductItem product={item} onAdd={onAdd}  />
       ))}
-    </div>
+    </ul>
   );
 };
 

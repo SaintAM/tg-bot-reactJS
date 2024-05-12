@@ -1,27 +1,27 @@
 import React from "react";
 import Button from "../Button/Button";
-import "./ProductItem.css";
+import styles from './ProductItem.module.scss'
 const tg = window.Telegram.WebApp;
 
-const ProductItem = ({ product, className, onAdd }) => {
+const ProductItem = ({ product, className, onAdd, }) => {
   const onAddHandler = () => {
     onAdd(product);
   };
 
   return (
-    <div className={"product " + className}>
-      <div className={"img"} />
-      <div className={"title"}>{product.title}</div>
-      <div className={"description"}>{product.description}</div>
-      <div className={"price"}>
+    <li className={styles.product}>
+      <img className={styles.img} src={product.imageUrl} alt="img пиццы"/>
+      <div className={styles.title}>{product.title}</div>
+      <div className={styles.description}>{product.description}</div>
+      <div className={styles.price}>
         <span>
-          Стоимость: <b>{product.price}</b>
+          Стоимость: <b>{product.price} ₽</b>
         </span>
       </div>
-      <Button className={"add-btn"} onClick={onAddHandler}>
+      <Button className={styles.addBtn} onClick={onAddHandler}>
         Добавить в корзину
       </Button>
-    </div>
+    </li>
   );
 };
 
