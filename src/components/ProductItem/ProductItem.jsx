@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../Button/Button";
 import styles from './ProductItem.module.scss'
-const tg = window.Telegram.WebApp;
 
 const ProductItem = ({ product, className, onAdd, }) => {
   const onAddHandler = () => {

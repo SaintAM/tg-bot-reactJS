@@ -5,10 +5,10 @@ import Button from "./components/Button/Button";
 import "./App.css";
 import ProductList from "./components/ProductList/ProductList";
 
-const tg = window.Telegram.WebApp;
+
 
 function App() {
-  const { onToggleButton } = useTelegram();
+  const { onToggleButton, tg } = useTelegram();
 
   useEffect(() => {
     tg.ready();

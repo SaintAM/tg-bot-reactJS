@@ -1,4 +1,4 @@
-const tg = window.Telegram.WebApp;
+let tg = window.Telegram.WebApp;
 
 export function useTelegram() {
   // onClose - закрывает web приложение

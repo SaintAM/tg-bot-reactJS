@@ -4,22 +4,22 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from "../../hooks/useTelegram";
 import { productService } from "../../services/products.service";
-const tg = window.Telegram.WebApp;
 
 const getTotalPrice = (items = []) => {
   return items.reduce((acc, item) => (acc += item.price), 0);
 };
 
 const ProductList = () => {
+  const [addedItems, setAddedItems] = useState([]);
+
   const { data } = useQuery({
     queryKey: ["product key"],
     queryFn: () => productService.getProducts(),
   });
   console.log(data);
 
-  const [addedItems, setAddedItems] = useState([]);
-  // const { queryId } = useTelegram();
-  const queryId = tg.initDataUnsafe?.query_id;
+  const { queryId, tg } = useTelegram();
+  // const queryId = tg.initDataUnsafe?.query_id;
 
   const onSendData = useCallback(() => {
     const data = {
